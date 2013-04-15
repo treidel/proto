@@ -1,33 +1,32 @@
-package project;
+package v1;
 
 option optimize_for = LITE_RUNTIME;
 
-enum LevelType
+message SetLevelRequest
 {
-  NONE = 0;
-  PEAK = 1;
-  VU = 2;
-}
-
-message SetLevelRequestV1
-{
+  enum LevelType
+  {
+    NONE = 0;
+    PEAK = 1;
+    VU = 2;
+  }
   required LevelType leveltype = 1; 
 }
 
-message SetLevelResponseV1
+message SetLevelResponse
 {
 }
 
-message QueryAudioChannelsRequestV1
+message QueryAudioChannelsRequest
 {
 }
 
-message QueryAudioChannelsResponseV1
+message QueryAudioChannelsResponse
 {
   repeated uint32 channels = 1;
 }
 
-message RequestV1
+message Request
 {
   enum RequestType
   {
@@ -36,30 +35,30 @@ message RequestV1
   }
 
   required RequestType type = 1;
-  optional SetLevelRequestV1 setlevel = 2;
-  optional QueryAudioChannelsRequestV1 queryaudiochannels = 3;
+  optional SetLevelRequest setlevel = 2;
+  optional QueryAudioChannelsRequest queryaudiochannels = 3;
 } 
 
-message ResponseV1
+message Response
 {
   required bool success = 1;
-  optional SetLevelResponseV1 setlevel = 2;
-  optional QueryAudioChannelsResponseV1 queryaudiochannels = 3;
+  optional SetLevelResponse setlevel = 2;
+  optional QueryAudioChannelsResponse queryaudiochannels = 3;
 }
 
-message LevelNotificationV1
+message LevelNotification
 {
   repeated int32 levelInDecibels = 1;
 }
 
 
-message NotificationV1
+message Notification
 {
-  optional LevelNotificationV1 level = 1;
+  optional LevelNotification level = 1;
 }
 
-message ResponseOrNotificationV1
+message ResponseOrNotification
 {
-  optional ResponseV1 response = 1;
-  optional NotificationV1 notification = 2;
+  optional Response response = 1;
+  optional Notification notification = 2;
 }
