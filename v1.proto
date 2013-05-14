@@ -2,15 +2,16 @@ package v1;
 
 option optimize_for = LITE_RUNTIME;
 
+enum LevelType
+{
+  NONE = 0;
+  PEAK = 1;
+  VU = 2;
+}
+
 message SetLevelRequest
 {
-  enum LevelType
-  {
-    NONE = 0;
-    PEAK = 1;
-    VU = 2;
-  }
-  required LevelType leveltype = 1; 
+  required LevelType type = 1; 
 }
 
 message SetLevelResponse
@@ -46,11 +47,22 @@ message Response
   optional QueryAudioChannelsResponse queryaudiochannels = 3;
 }
 
-message LevelNotification
+message PeakLevelNotification
 {
-  repeated int32 levelInDecibels = 1;
+  repeated int32 levelInDB = 1;
 }
 
+message VULevelNotification
+{
+  repeated int32 levelInDB = 1;
+}
+
+message LevelNotification
+{
+  required LevelType type = 1;
+  optional PeakLevelNotification peak = 2;
+  optional VULevelNotification vu = 3;
+}
 
 message Notification
 {
