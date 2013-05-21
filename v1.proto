@@ -27,14 +27,14 @@ message QueryAudioChannelsResponse
   repeated uint32 channels = 1;
 }
 
+enum RequestType
+{
+  SETLEVEL = 1;
+  QUERYAUDIOCHANNELS = 2;
+}
+
 message Request
 {
-  enum RequestType
-  {
-    SETLEVEL = 1;
-    QUERYAUDIOCHANNELS = 2;
-  }
-
   required RequestType type = 1;
   optional SetLevelRequest setlevel = 2;
   optional QueryAudioChannelsRequest queryaudiochannels = 3;
@@ -42,9 +42,10 @@ message Request
 
 message Response
 {
-  required bool success = 1;
-  optional SetLevelResponse setlevel = 2;
-  optional QueryAudioChannelsResponse queryaudiochannels = 3;
+  required RequestType type = 1;
+  required bool success = 2;
+  optional SetLevelResponse setlevel = 3;
+  optional QueryAudioChannelsResponse queryaudiochannels = 4;
 }
 
 message PeakLevelNotification
@@ -63,19 +64,25 @@ message LevelNotification
   optional PeakLevelNotification peak = 2;
   optional VULevelNotification vu = 3;
 }
+enum NotificationType
+{
+  LEVEL = 1;
+}
 
 message Notification
 {
-  enum NotificationType
-  {
-    LEVEL = 1;
-  }
   required NotificationType type = 1;
   optional LevelNotification level = 2;
 }
 
 message ResponseOrNotification
 {
-  optional Response response = 1;
-  optional Notification notification = 2;
+  enum ResponseOrNotificationType
+  {
+    RESPONSE = 1;
+    NOTIFICATION = 2;
+  }
+  required ResponseOrNotificationType type = 1;
+  optional Response response = 2;
+  optional Notification notification = 3;
 }
