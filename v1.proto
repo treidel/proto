@@ -57,8 +57,7 @@ message LevelRecord
 
 message LevelNotification
 {
-  required LevelType type = 1;
-  repeated LevelRecord records = 2;
+  repeated LevelRecord records = 1;
 }
 
 enum NotificationType
