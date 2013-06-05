@@ -48,22 +48,18 @@ message Response
   optional QueryAudioChannelsResponse queryaudiochannels = 4;
 }
 
-message PeakLevelNotification
+message LevelRecord
 {
-  repeated int32 levelInDB = 1;
-}
-
-message VULevelNotification
-{
-  repeated int32 levelInDB = 1;
+  required uint32 channel = 1;
+  required int32 levelInDB = 2;
 }
 
 message LevelNotification
 {
   required LevelType type = 1;
-  optional PeakLevelNotification peak = 2;
-  optional VULevelNotification vu = 3;
+  repeated LevelRecord records = 2;
 }
+
 enum NotificationType
 {
   LEVEL = 1;
