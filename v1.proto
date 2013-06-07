@@ -52,7 +52,8 @@ message LevelRecord
 {
   required uint32 channel = 1;
   required LevelType type = 2;
-  required int32 levelInDB = 3;
+  required int32 peakInDB = 3;
+  required int32 powerInDB = 4;
 }
 
 message LevelNotification
