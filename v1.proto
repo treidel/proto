@@ -12,6 +12,7 @@ enum LevelType
 message SetLevelRequest
 {
   required LevelType type = 1; 
+  required uint32 channel = 2;
 }
 
 message SetLevelResponse
