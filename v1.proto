@@ -5,8 +5,9 @@ option optimize_for = LITE_RUNTIME;
 enum LevelType
 {
   NONE = 0;
-  PEAK = 1;
-  VU = 2;
+  PPM = 1;
+  DIGITALPEAK = 2;
+  VU = 3;
 }
 
 message SetLevelRequest
