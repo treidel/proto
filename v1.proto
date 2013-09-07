@@ -14,6 +14,7 @@ message SetLevelRequest
 {
   required LevelType type = 1; 
   required uint32 channel = 2;
+  optional uint32 holdtime = 3;
 }
 
 message SetLevelResponse
