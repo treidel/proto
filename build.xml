@@ -1,0 +1,47 @@
+<project name="proto" default="dist" basedir=".">
+	<description>build file for protocol buffer generation</description>
+	<!-- set global properties for this build -->
+	<property name="src" location="src" />
+	<property name="build" location="build" />
+	<property name="dist" location="dist" />
+
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${build}" />
+		<mkdir dir="${src}" />
+	</target>
+
+	<target name="generate" depends="init">
+		<exec executable="protoc">
+			<arg value="--java_out=${src}" />
+			<arg value="v1.proto" />
+		</exec>
+	</target>
+
+	<path id="lib.path.ref">
+		<fileset dir="lib" includes="*.jar" />
+	</path>
+
+	<target name="compile" depends="generate" description="compile the source ">
+		<!-- Compile the java code from ${src} into ${build} -->
+		<javac srcdir="${src}" destdir="${build}" includeantruntime="false"
+			classpathref="lib.path.ref" />
+	</target>
+
+	<target name="dist" depends="compile" description="generate the distribution">
+		<!-- Create the distribution directory -->
+		<mkdir dir="${dist}" />
+
+		<!-- Put everything in ${build} into the proto.jar file -->
+		<jar jarfile="${dist}/proto.jar" basedir="${build}" />
+	</target>
+
+	<target name="clean" description="clean up">
+		<!-- Delete the ${build} and ${dist} directory trees -->
+		<delete dir="${build}" />
+		<delete dir="${dist}" />
+		<delete dir="${src}" />
+	</target>
+</project>
