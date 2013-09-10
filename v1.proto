@@ -57,6 +57,7 @@ message LevelRecord
   required LevelType type = 2;
   optional float peakInDB = 3;
   optional float vuInUnits = 4;
+  optional float holdInDB = 5;
 }
 
 message LevelNotification
