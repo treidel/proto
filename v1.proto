@@ -30,25 +30,36 @@ message QueryAudioChannelsResponse
   repeated uint32 channels = 1;
 }
 
+message EchoRequest
+{
+}
+
+message EchoResponse
+{
+}
+
 enum RequestType
 {
-  SETLEVEL = 1;
-  QUERYAUDIOCHANNELS = 2;
+  ECHO = 1;
+  SETLEVEL = 2;
+  QUERYAUDIOCHANNELS = 3;
 }
 
 message Request
 {
   required RequestType type = 1;
-  optional SetLevelRequest setlevel = 2;
-  optional QueryAudioChannelsRequest queryaudiochannels = 3;
+  optional EchoRequest echo = 2;
+  optional SetLevelRequest setlevel = 3;
+  optional QueryAudioChannelsRequest queryaudiochannels = 4;
 } 
 
 message Response
 {
   required RequestType type = 1;
   required bool success = 2;
-  optional SetLevelResponse setlevel = 3;
-  optional QueryAudioChannelsResponse queryaudiochannels = 4;
+  optional EchoResponse echo = 3;
+  optional SetLevelResponse setlevel = 4;
+  optional QueryAudioChannelsResponse queryaudiochannels = 5;
 }
 
 message LevelRecord
