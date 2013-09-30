@@ -29,3 +29,8 @@ install_manifest.txt
 # generated protobuf stuff
 *.pb.cc
 *.pb.h
+
+/src
+/build
+/dist
+/bin
