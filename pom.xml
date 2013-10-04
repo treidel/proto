@@ -81,6 +81,7 @@
                             <addClasspath>true</addClasspath>
                         </manifest>
                         <manifestEntries>
+                            <Build-Artifact>${project.project}</Build-Artifact>
                             <Build-Number>${build.number}</Build-Number>
                         </manifestEntries>
                     </archive>
