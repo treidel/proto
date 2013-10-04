@@ -9,6 +9,10 @@
 	<packaging>jar</packaging>
 	<name>Leveling Glass Protocol Library</name>
 
+    <properties>
+        <build.number>SNAPSHOT</build.number>
+    </properties>
+
 	<dependencies>
         <dependency>
 	        <groupId>com.google.protobuf</groupId>
@@ -16,6 +20,7 @@
 	        <version>2.5.0</version>
         </dependency>
 	</dependencies>
+
 	<build>
 		<finalName>${project.artifactId}</finalName>
 		<sourceDirectory>src</sourceDirectory>
@@ -65,6 +70,22 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <index>true</index>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                        <manifestEntries>
+                            <Build-Number>${build.number}</Build-Number>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
